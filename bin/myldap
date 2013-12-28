@@ -19,6 +19,6 @@ function resolveConfig(filename) {
 	try {
 		return config = require(path.resolve(filename));
 	} catch (e) {
-		throw Error('The config file could not be resolved: %s', e);
+		throw Error('The config file could not be resolved: ' + e);
 	}
 }
