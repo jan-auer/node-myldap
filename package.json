@@ -1,6 +1,19 @@
 {
-	"name"    : "myldap",
+	"name" : "myldap",
 	"version" : "1.0.0",
+	"author" : "Jan Michael Auer <jan.auer@me.com>",
+	"description" : "A LDAP server with configurable backends",
+
+	"contributors" : [
+		{ 
+			"name" : "Martin Prebio", 
+			"email" : "martin.prebio@gmail.com"
+		},
+		{
+			"name" : "Jakob Etzel",
+			"email" : "jakob.etzel@gmail.com"
+		}
+	],
 	
 	"bin" : {
 		"myldap" : "./bin/myldap"
@@ -11,6 +24,11 @@
 	},
 
 	"main" : "./lib/index.js",
+
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cyber-tron/node-myldap.git"
+	},
 
 	"dependencies" : {
 		"ldapjs"  : "latest",
