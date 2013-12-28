@@ -2,14 +2,18 @@
 	"name"    : "myldap",
 	"version" : "1.0.0",
 	
-	"dependencies" : {
-		"ldapjs"  : "latest",
-		"mysql"   : "latest",
-		"forever" : "latest"
+	"bin" : {
+		"myldap" : "./bin/myldap"
 	},
 
 	"scripts" : {
-		"start" : "./node_modules/forever/bin/forever start myldap.js",
-		"stop"  : "./node_modules/forever/bin/forever stop myldap.js"
+		"start" : "node ./bin/myldap"
+	},
+
+	"main" : "./lib/index.js",
+
+	"dependencies" : {
+		"ldapjs"  : "latest",
+		"mysql"   : "latest"
 	}
 }
