@@ -5,7 +5,9 @@ var MyLDAP = require('../lib');
 
 var filename = getConfigFile();
 var config = resolveConfig(filename);
-new MyLDAP(config).run();
+new MyLDAP(config).run(function () {
+	console.log('LDAP Server started successfully!');
+});
 
 function getConfigFile() {
 	var filename = process.argv[2];
