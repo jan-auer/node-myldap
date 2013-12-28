@@ -7,7 +7,7 @@ var config  = require('./config.json');
 
 // Application Constants   ------------------------------------------
 
-var LDAP_PORT = 1389;
+var DEFAULT_PORT = 1389;
 var SQL_QUERY = 'SELECT %s FROM %s WHERE %s';
 
 // Application Logic   ----------------------------------------------
@@ -44,7 +44,7 @@ function startLDAP(callback) {
 	var server = ldap.createServer();
 	server.bind(config.ldap.dn, ldapBind);
 	server.search(config.ldap.dn, ldapSearch);
-	server.listen(process.argv[2] || LDAP_PORT, callback);
+	server.listen(config.ldap.port || DEFAULT_PORT, callback);
 }
 
 function ldapBind(req, res, next) {

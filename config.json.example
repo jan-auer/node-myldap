@@ -8,6 +8,7 @@
 	},
 
 	"ldap" : {
+		"port" : 1389,
 		"dn"   : "dc=example,dc=org",
 		"keys" : {
 			"id"            : "id",
