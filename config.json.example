@@ -1,0 +1,22 @@
+{
+	"mysql" : {
+		"host"  : "localhost",
+		"user"  : "root",
+		"pwd"   : "",
+		"db"    : "ldap",
+		"table" : "users"
+	},
+
+	"ldap" : {
+		"dn"   : "dc=example,dc=org",
+		"keys" : {
+			"id"            : "id",
+			"displayname"   : "(first_name || ' ' || last_name)",
+			"givenname"     : "first_name",
+			"sn"            : "last_name",
+			"cn"            : "(first_name || ' ' || last_name)",
+			"mail"          : "email",
+			"rfc822mailbox" : "email"
+		}
+	}
+}
