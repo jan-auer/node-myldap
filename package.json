@@ -16,11 +16,14 @@
 	],
 	
 	"bin" : {
-		"myldap" : "./bin/myldap"
+		"myldap" : "./bin/myldap",
+		"myldapd" : "./bin/myldapd"
 	},
 
 	"scripts" : {
-		"start" : "node ./bin/myldap"
+		"start" : "bin/myldapd start config.json",
+		"stop" : "bin/myldapd stop config.json",
+		"restart" : "bin/myldapd restart config.json"
 	},
 
 	"main" : "./lib/index.js",

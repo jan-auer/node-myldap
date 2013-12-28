@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var exec = require('child_process').exec;
+var pidfile = process.cwd() + '/.pid';
+var argsfile = process.cwd() + '/.args';
+
+launch(process.argv[2]);
+
+function launch(command) {
+	switch (command) {
+		case 'start': 
+			start(getArgs()); 
+			break;
+		case 'stop': 
+			stop(); 
+			break;
+		case 'restart':
+			restart();
+			break;
+		default:
+			throw Error('This command is not supported: ', command);
+	}
+}
+
+function start(args) {
+	if (load(pidfile)) {
+		console.log('MyLDAP is already running.');
+		return;
+	}
+
+	var path = __dirname + '/myldap ';
+	var child = exec('/usr/bin/env node ' + path + args, function (error, stdout, stderr) {
+		if (error) {
+			console.log(stderr);
+			process.exit(-1);
+		} else {
+			save(pidfile, child.pid);
+			save(argsfile, args);
+			console.log('MyLDAP started successfully.');
+		}
+	});
+}
+
+function stop() {
+	var pid = load(pidfile);
+	if (!pid) {
+		console.log('MyLDAP is not running.');
+		return;
+	}
+
+	process.kill(pid);
+	save(pidfile, 0);
+	save(argsfile, '');
+
+	console.log('MyLDAP stopped successfully.');
+}
+
+function restart() {
+	var args = load(argsfile) || '';
+	stop();
+	start(args);
+}
+
+function load(filename) {
+	return fs.existsSync(pidfile) ? fs.readFileSync(pidfile) : false;
+}
+
+function save(filename, value) {
+	fs.writeFileSync(filename, value);
+}
+
+function getArgs() {
+	return Array.prototype.slice.call(process.argv, 3);
+}
