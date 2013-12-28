@@ -1,5 +1,10 @@
 {
-	"mysql" : {
+	"ldap" : {
+		"port" : 1389,
+		"dn"   : "dc=example,dc=org"
+	},
+
+	"backend" : {
 		"host"  : "localhost",
 		"user"  : "root",
 		"pwd"   : "",
@@ -7,17 +12,13 @@
 		"table" : "users"
 	},
 
-	"ldap" : {
-		"port" : 1389,
-		"dn"   : "dc=example,dc=org",
-		"keys" : {
-			"id"            : "id",
-			"displayname"   : "(first_name || ' ' || last_name)",
-			"givenname"     : "first_name",
-			"sn"            : "last_name",
-			"cn"            : "(first_name || ' ' || last_name)",
-			"mail"          : "email",
-			"rfc822mailbox" : "email"
-		}
+	"attributes" : {
+		"id"            : "id",
+		"displayname"   : "(first_name || ' ' || last_name)",
+		"givenname"     : "first_name",
+		"sn"            : "last_name",
+		"cn"            : "(first_name || ' ' || last_name)",
+		"mail"          : "email",
+		"rfc822mailbox" : "email"
 	}
 }
