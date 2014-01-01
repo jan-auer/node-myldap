@@ -28,7 +28,7 @@ function launch(command) {
 }
 
 function start(args) {
-	if (load(pidfile)) {
+	if (load(pidfile) > 0) {
 		console.log('MyLDAP is already running.');
 		return;
 	}
