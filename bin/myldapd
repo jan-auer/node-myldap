@@ -70,7 +70,7 @@ function restart() {
 }
 
 function load(filename) {
-	return fs.existsSync(pidfile) ? fs.readFileSync(pidfile) : false;
+	return fs.existsSync(pidfile) ? fs.readFileSync(pidfile).toString() : false;
 }
 
 function save(filename, value) {
