@@ -5,6 +5,10 @@ var exec = require('child_process').exec;
 var pidfile = process.cwd() + '/.pid';
 var argsfile = process.cwd() + '/.args';
 
+var BIN_PATH = __dirname + '/myldap ';
+var EXIT_CODE_SUCCESS = 0;
+var EXIT_CODE_ERROR   = 1;
+
 launch(process.argv[2]);
 
 function launch(command) {
@@ -29,17 +33,20 @@ function start(args) {
 		return;
 	}
 
-	var path = __dirname + '/myldap ';
-	var child = exec('/usr/bin/env node ' + path + args, function (error, stdout, stderr) {
+	var child = exec('/usr/bin/env node ' + BIN_PATH + args, function (error, stdout, stderr) {
 		if (error) {
 			console.log(stderr);
-			process.exit(-1);
-		} else {
-			save(pidfile, child.pid);
-			save(argsfile, args);
-			console.log('MyLDAP started successfully.');
+			process.exit(EXIT_CODE_ERROR);
 		}
 	});
+
+	// TODO: don't use a timeout to determine whether the server has started successfully.
+	setTimeout(function () {
+		save(pidfile, child.pid);
+		save(argsfile, args);
+		console.log('MyLDAP started successfully.');
+		process.exit(EXIT_CODE_SUCCESS);
+	}, 3000);
 }
 
 function stop() {
